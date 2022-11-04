@@ -1,14 +1,26 @@
-import {Outlet} from 'react-router-dom'
+import {Fragment} from 'react'
+import {Outlet, Link} from 'react-router-dom'
+import './navbar.styles.scss'
+import {ReactComponent as NavBarLogo} from '../../assets/health-svgrepo-com.svg'
 
 
 const NavBar = () => {
     return (
-      <div>
-        <div>
-          <h1>Navbar here!</h1>
+      <Fragment>
+        <div className='navBar'>
+            <Link className="logo-container" to='/'>
+                   <div>
+                   <NavBarLogo className='navbar-logo'/>
+                   </div> 
+            </Link>
+          <div className="nav-links-container">
+            <Link className='nav-link' to='/home'>
+                Shop
+            </Link>
+          </div>
         </div>
         <Outlet />
-      </div>
+      </Fragment>
     )
   }
 
