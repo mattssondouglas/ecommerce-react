@@ -25,11 +25,10 @@ const firebaseConfig = {
   export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider)
   export const db = getFirestore()
 
-  export const createUserDocumentFromAuth = async (userAuth) => {
+  export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
     if (!userAuth) return;
     const userDocRef = doc(db, 'users', userAuth.uid)
     const userSnapshot = await getDoc(userDocRef)
-    console.log(userSnapshot.exists());
   
 
   if(!userSnapshot.exists()) {
@@ -40,10 +39,11 @@ const firebaseConfig = {
       await setDoc(userDocRef, {
         username,
         email,
-        createdAt
+        createdAt,
+        ...additionalInformation
       })
     } catch (error) {
-      console.log('eror creating user', error.message);
+      console.log('error creating user', error.message);
     }
   }
   return userDocRef
