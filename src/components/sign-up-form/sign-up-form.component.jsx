@@ -36,6 +36,7 @@ const handleSubmit = async (event) => {
 
         await createUserDocumentFromAuth(user, {username})
         resetFormFields()
+        
     } catch(error) {
         if(error.code = 'auth/email-already-in-use') {
             alert('Email already in use. Cannot create user with the same email')
